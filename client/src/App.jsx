@@ -7,6 +7,7 @@ import About from './pages/About'
 import Profile from './pages/Profile'
 import Signin from './pages/Signin'
 import SignUp from './pages/SignUp'
+import Header from './components/header'
 
 function App() {
 
@@ -23,8 +24,10 @@ function App() {
       <h1>MERN Application with Authorization</h1>
       <h2>using React.js json web token JWT, redux toolkit cookie</h2>
       <BrowserRouter >
+        {/* Header Section */}
+        <Header  />
         <Routes >
-          <Route path="/" element={<Home/>}/>
+          <Route path="/Home" element={<Home/>}/>
           <Route path="/About" element={<About/>}/>
           <Route path="/Profile" element={<Profile/>}/>
           <Route path="/SignUp" element={<SignUp/>}/>
