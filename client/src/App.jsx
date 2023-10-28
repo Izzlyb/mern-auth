@@ -8,6 +8,7 @@ import About from './pages/About';
 import Profile from './pages/Profile';
 import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
+import PrivateRoute from './components/PrivateRoute';
 
 function App() {
 
@@ -30,11 +31,14 @@ function App() {
           {/* Header Section */}
           <Header />
           <Routes >
-            <Route path="/Home" element={<Home/>}/>
+            <Route path="/" element={<Home/>}/>
             <Route path="/About" element={<About/>}/>
-            <Route path="/Profile" element={<Profile/>}/>
             <Route path="/SignUp" element={<SignUp/>}/>
             <Route path="/SignIn" element={<SignIn/>}/>
+            <Route element={<PrivateRoute />} >
+              <Route path='/Profile' element={<Profile />}/>
+            </Route>
+            {/* <Route path="/SignIn" element={<SignIn/>}/> */}
           </Routes>
         </BrowserRouter>
       </div>
