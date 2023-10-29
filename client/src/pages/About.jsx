@@ -1,5 +1,15 @@
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const About = () => {
+  const { currentUser } = useSelector((state) => state.user);
+  const navigate = useNavigate();
+
+  if( !currentUser ) {
+    navigate("/SignIn");
+    return;
+  }
+
   return (
   
     <div className='px-4 py-12 max-w-2xl mx-auto'>

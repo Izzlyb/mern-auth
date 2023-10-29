@@ -42,6 +42,8 @@ export const SignIn = async (req, res, next) => {
         .status(200)
         .json(rest);
 
+    console.log(">>>End of SignIn<<<");
+
   } catch( error ) {
     next( error );
   }

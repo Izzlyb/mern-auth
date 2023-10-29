@@ -1,5 +1,15 @@
+import { useSelector } from "react-redux";
+import { redirect } from "react-router-dom";
+
 
 const Home = () => {
+  const { currentUser } = useSelector((state) => state.user);
+
+  if( !currentUser ) {
+    redirect("/SignIn");
+    return;
+  }
+
   return (
     <div className='px-4 py-12 max-w-2xl mx-auto'>
       <h1 className='text-3xl font-bold  mb-4 text-blue-900'>
