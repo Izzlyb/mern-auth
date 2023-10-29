@@ -11,7 +11,10 @@ import {
 import { 
   updateUserStart, 
   updateUserSuccess, 
-  updateUserFailure 
+  updateUserFailure,
+  deleteUserStart, 
+  deleteUserSuccess, 
+  deleteUserFailure 
 } from "../redux/user/userSlice.js";
 
 
@@ -96,8 +99,27 @@ const Profile = () => {
     }
   };
 
-  const handleDeleteAccount = () => {
+  const handleDeleteAccount = async () => {
     console.log("handleSubmit");
+    try {
+      dispatch( deleteUserStart() );
+
+      const res = await fetch(`/api/user/delete/${currentUser._id}`, {
+        method: "DELETE"
+        });
+
+      const data = await res.json();
+      if( data.success === false ) {
+        dispatch(updateUserFailure( data ));
+        return;
+      }
+
+      dispatch( deleteUserSuccess( data ) );
+
+    } catch ( error ) {
+      console.log("---error on handleSubmit function---");
+      dispatch(deleteUserFailure( error ));
+    }
   }
 
   const handleSignOut = async () => {
@@ -202,7 +224,6 @@ const Profile = () => {
       </p>
     </div>
   );
-
 };
 
 export default Profile;
