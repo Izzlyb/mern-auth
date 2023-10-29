@@ -21,7 +21,7 @@ export const SignUp = async (req, res, next) => {
 }
 
 export const SignIn = async (req, res, next) => {
-  const { username, email, password } = req.body;
+  const { email, password } = req.body;
 
   console.log(req.body);
   try {
@@ -92,4 +92,9 @@ export const google = async (req, res, next) => {
   } catch( error ) {
     next( error );
   }
+}
+
+
+export const SignOut = async (req, res, next) => {
+  res.clearCookie('access_token').status(200).json("Sign Out successfully");
 }
