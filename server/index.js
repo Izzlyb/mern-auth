@@ -4,14 +4,26 @@ import dotenv from "dotenv";
 import userRoute from "./routes/user.route.js";
 import authRoute from "./routes/auth.route.js";
 import cookieParser from "cookie-parser";
+import path from path;
 
 dotenv.config();
 
 console.log("+++ Starting the server...")
 
+const PORT = 5000;
+
+__dirname = path.resolve();
+
 const app = express();
 
+app.use(express.static(path.join(__dirname, "/client/dist")))
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "client", "dist", "index.html"));
+});
+
 app.use(express.json())
+app.use(cookieParser());
 
 mongoose.connect( process.env.MONGODB_DATABASE_TH_URI )
   .then(() => {
@@ -21,7 +33,6 @@ mongoose.connect( process.env.MONGODB_DATABASE_TH_URI )
     console.log(error);
   });
 
-const PORT = 5000;
 
 app.get("/", (req, res) => {
   res.json({
@@ -32,8 +43,6 @@ app.get("/", (req, res) => {
 app.use("/api/user/", userRoute );
 
 app.use("/api/auth/", authRoute );
-
-app.use(cookieParser());
 
 app.use((err, req, res, next) => {
   const statusCode = err.statusCode || 409;
