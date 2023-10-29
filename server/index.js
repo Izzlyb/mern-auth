@@ -4,7 +4,7 @@ import dotenv from "dotenv";
 import userRoute from "./routes/user.route.js";
 import authRoute from "./routes/auth.route.js";
 import cookieParser from "cookie-parser";
-import path from path;
+import path from 'path';
 
 dotenv.config();
 
@@ -12,7 +12,7 @@ console.log("+++ Starting the server...")
 
 const PORT = 5000;
 
-__dirname = path.resolve();
+const __dirname = path.resolve();
 
 const app = express();
 
